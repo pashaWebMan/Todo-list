@@ -1,0 +1,47 @@
+<div class="wrapper">
+    <form class="newNoteForm">
+    <label for="createNoteFieldName">
+        Label
+        <input type="text" name="createNoteFieldName" #createNoteFieldName class="createNoteField" required>
+    </label>
+    <label for="createNoteFieldCategory">
+        Category
+        <input type="text" name="createNoteFieldCategory" #createNoteFieldCategory class="createNoteField category">
+    </label>
+    <label for="createNoteFieldEndingTime">
+        Ending time
+        <input type="datetime-local" placeholder="yyyy-mm-dd --:--" name="createNoteFieldEndingTime" #createNoteFieldEndingTime class="createNoteField endingTime" required>
+    </label>
+    <div class="categorySection">
+        <button (click)="showCategoryList(categoryListItem)" class="createButton showCategoryList">Category</button>
+        <ul #categoryListItem class="categoryList">
+            <li (click)="showAllNotes()">All</li>
+            <li *ngFor="let note of notesList" #categoryFromList (click)="notesListFiltering(note.category)">{{ note.category }}</li>
+        </ul>
+    </div>
+    <input type="submit" value="Add" class="createButton" (click)="createNote(createNoteFieldName.value, createNoteFieldCategory.value, createNoteFieldEndingTime.value)" (keyup.enter)="createNote(createNoteFieldName.value, createNoteFieldCategory.value, createNoteFieldEndingTime.value)">
+    </form>
+    <table>
+        <tr class="note">
+            <td>Name</td>
+            <td>Category</td>
+            <td>Creation time</td>
+            <td>Ending time</td>
+            <td>Actions</td>
+        </tr>
+        <tr *ngFor="let note of notesList" class="note">
+            <td>
+                <p *ngIf="!note.labelEditing" (dblclick)="labelEditing(note)">{{ note.label }}</p>
+                <input *ngIf="note.labelEditing" type="text" (blur)="labelEditingDone(note)" (keyup.enter)="labelEditingDone(note)" [(ngModel)]="note.label" autofocus>
+            </td>
+            <td>
+                <p *ngIf="!note.categoryEditing" (dblclick)="categoryEditing(note)">{{ note.category }}</p>
+                <input *ngIf="note.categoryEditing" type="text" (blur)="categoryEditingDone(note)" (keyup.enter)="categoryEditingDone(note)" [(ngModel)]="note.category" autofocus>
+            </td>
+            <td class="noteCreationTime">{{ note.creationTime }}</td>
+            <td class="noteEndingTime">{{ note.endingTime }}</td>
+            <td><span (click)="deleteNote(note)" #closeButton class="closeButton">Delete</span></td>
+        </tr>
+    </table>
+    <p>Current date: {{ currentDate }}</p>
+</div>

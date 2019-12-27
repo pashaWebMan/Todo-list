@@ -1,0 +1,121 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all ease-in-out .2s;
+}
+:focus {
+    outline: none;
+}
+li {
+    list-style-type: none;
+}
+.note {
+    height: 10vh;
+    width: 90vw;
+    background-color: #ff5b5b;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.6vw;
+    border-radius: 1.2em;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5em;
+    margin-top: 1em;
+}
+span {
+    cursor: pointer;
+}
+tr:first-child {
+    font-weight: 800;
+}
+td:last-child {
+    width: auto;
+}
+td {
+    width: 21vw;
+}
+label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3vw;
+}
+.newNoteForm {
+    display: flex;
+    align-items: flex-end;
+}
+.createNoteField {
+    width: 20vw;
+    height: 10vh;
+    border-radius: 0.5em;
+    border: 1px solid black;
+    padding: 1vh 1.7vw;
+    font-size: larger;
+}
+.createNoteField {
+    margin-right: 3vw;
+}
+.endingTime {
+    width: 17vw;
+    text-align: center;
+}
+.categoryList {
+    display: none;
+    padding: 0;
+    position: absolute;
+    width: 11vw;
+    background-color: #ffffff;
+    top: 12vh;
+    right: 12.2vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.3vw;
+    overflow: hidden;
+    color: #ff5b5b;
+    border: 1px solid #ff5b5b;
+    font-size: 1.2vw;
+}
+.categoryList li {
+    margin-bottom: 0.7vh;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.categoryList li:last-child {
+    margin-bottom: 0;
+}
+.categoryList li:hover {
+    background-color: #ff5b5b;
+    color: #ffffff;
+}
+.createButton {
+    width: 8vw;
+    height: 12.2vh;
+    margin-left: 1vw;
+    color: #ffffff;
+    background-color: #ff5b5b;
+    border: none;
+    cursor: pointer;
+    border-radius: 1vw;
+    font-size: 1.3vw;
+    font-weight: 600;
+}
+.createButton:hover {
+    background-color: #ffffff;
+    color: #ff5b5b;
+    border: 1px solid #ff5b5b;
+}
+.closeButton {
+    padding: 0.7vh 0.7vw;
+    border-radius: 0.5vw;
+    font-size: 1.5vw
+}
+.closeButton:hover {
+    background-color: #ffffff;
+    color: #ff5b5b;
+}
