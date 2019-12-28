@@ -24,7 +24,7 @@ export class TodoListComponent implements OnInit {
     }, 1000);
   }
   createNote(name, category, endingTime) {
-    if(name !== "") {
+    if (name !== "" && endingTime !== "") {
       this.date = moment().format("YYYY-MM-DD HH:mm");
       var newNote = {
         label: name,
@@ -38,11 +38,8 @@ export class TodoListComponent implements OnInit {
       localStorage.setItem(`${newNote.label}`, this.localStorageNoteSerialized);
       this.notesListAll.push(newNote);
       location.reload();
+      }
     }
-    else {
-      alert("Error, please follow the instructions")
-    }
-  }
   deleteNote(note) {
     this.notesList = this.notesList.filter(n => this.notesList.indexOf(n) !== this.notesList.indexOf(note));
     localStorage.removeItem(note.label);
