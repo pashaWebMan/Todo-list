@@ -31,7 +31,7 @@
             <td>Ending time</td>
             <td>Actions</td>
         </tr>
-        <tr *ngFor="let note of notesList" class="note">
+        <tr *ngFor="let note of notesList | filter" class="note">
             <td>
                 <p *ngIf="!note.labelEditing" (dblclick)="labelEditing(note)">{{ note.label }}</p>
                 <input *ngIf="note.labelEditing" type="text" (blur)="labelEditingDone(note)" (keyup.enter)="labelEditingDone(note)" [(ngModel)]="note.label" autofocus>
