@@ -7,7 +7,7 @@ import * as moment from 'moment';
 export class FilterPipe implements PipeTransform {
 
   transform(notesList): any {
-    console.log(new Date()) //moment('2019-12-28 23:40', 'YYYY-MM-DD HH:mm').toDate())
+    return notesList.filter(d => moment(d.endingTime, 'YYYY-MM-DD HH:mm').toDate() >= new Date())
   }
 
 }

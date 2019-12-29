@@ -10,13 +10,13 @@
     </label>
     <label for="createNoteFieldEndingTime">
         Ending time
-        <input ngModel #noteEndingTime="ngModel" type="datetime-local" placeholder="yyyy-mm-dd --:--" name="noteEndingTime" #createNoteFieldEndingTime class="createNoteField endingTime" required pattern="([0-2][0-9]{3})\-([0-1][0-9])\-([0-3][0-9]) ([0-5][0-9])\:([0-5][0-9])">
+        <input ngModel #noteEndingTime="ngModel" type="datetime-local" placeholder="yyyy-mm-dd --:--" name="noteEndingTime" #createNoteFieldEndingTime class="createNoteField endingTime" required pattern="([0-2][0-9]{3})\-([0-1][0-9])\-([0-3][0-9]) ([0-2][0-9])\:([0-5][0-9])">
     </label>
     <div class="categorySection">
         <button (click)="showCategoryList(categoryListItem)" class="createButton showCategoryList">Category</button>
         <ul #categoryListItem class="categoryList">
             <li (click)="showAllNotes()">All</li>
-            <li *ngFor="let note of notesList" #categoryFromList (click)="notesListFiltering(note.category)">{{ note.category }}</li>
+            <li *ngFor="let note of notesList | filter" #categoryFromList (click)="notesListFiltering(note.category)">{{ note.category }}</li>
         </ul>
     </div>
     <input type="submit" value="Add" class="createButton" (click)="createNote(createNoteFieldName.value, createNoteFieldCategory.value, createNoteFieldEndingTime.value)">
