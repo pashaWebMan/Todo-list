@@ -8,7 +8,8 @@ import * as moment from 'moment';
 })
 export class TodoListComponent implements OnInit {
   public time;
-  public localStorageCategorySerialized;
+  public noteLabelEditing;
+  public noteCategoryEditing;
   public date;
   public notesListAll = [];
   public localStorageNoteSerialized;
@@ -68,5 +69,19 @@ export class TodoListComponent implements OnInit {
   }
   categoryEditingDone(note) {
     note.categoryEditing = false;
+  }
+  getNoteLabelEditing(note) {
+    this.noteLabelEditing = note.label;
+  }
+  getNoteCategoryEditing(note) {
+    this.noteCategoryEditing = note.label;
+  }
+  pushNoteLabel(note) {
+    localStorage.removeItem(`${this.noteLabelEditing}`);
+    this.createNote(note.label, note.category, note.endingTime);
+  }
+  pushNoteCategory(note) {
+    localStorage.removeItem(`${this.noteCategoryEditing}`);
+    this.createNote(note.label, note.category, note.endingTime);
   }
 }
