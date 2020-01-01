@@ -10,7 +10,6 @@ export class TodoListComponent implements OnInit {
   public time;
   public localStorageCategorySerialized;
   public date;
-  public currentDate = moment().format("YYYY-MM-DD HH:mm");
   public notesListAll = [];
   public localStorageNoteSerialized;
   public notesList = Object.values(localStorage).map(obj => JSON.parse(obj));
@@ -19,9 +18,6 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit() {
     this.notesListAll = this.notesList;
-    setInterval(() => {
-      this.currentDate = moment().format("YYYY-MM-DD HH:mm")
-    }, 1000);
   }
   createNote(name, category, endingTime) {
     if (name !== "" && endingTime !== "") {
@@ -69,10 +65,5 @@ export class TodoListComponent implements OnInit {
   }
   categoryEditingDone(note) {
     note.categoryEditing = false;
-  }
-  isNoteExpired(note) {
-    if (note.endingTime === this.currentDate) {
-      this.deleteNote(note);
-    }
   }
 }
