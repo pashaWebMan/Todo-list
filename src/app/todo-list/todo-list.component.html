@@ -16,7 +16,7 @@
         <button (click)="showCategoryList(categoryListItem)" class="createButton showCategoryList">Category</button>
         <ul #categoryListItem class="categoryList">
             <li (click)="showAllNotes()">All</li>
-            <li *ngFor="let note of notesList | filter" #categoryFromList (click)="notesListFiltering(note.category)">{{ note.category }}</li>
+            <li *ngFor="let note of notesList | filterCategory" #categoryFromList (click)="notesListFiltering(note.category)">{{ note.category }}</li>
         </ul>
     </div>
     <input type="submit" value="Add" class="createButton" (click)="createNote(createNoteFieldName.value, createNoteFieldCategory.value, createNoteFieldEndingTime.value)">

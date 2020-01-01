@@ -29,6 +29,13 @@ li {
     padding: 0 1.5em;
     margin-top: 1em;
 }
+.alert {
+    font-size: 1.2vw;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    padding-left: 1.2rem;
+}
 span {
     cursor: pointer;
 }
@@ -91,6 +98,7 @@ label {
     color: #ff5b5b;
     border: 1px solid #ff5b5b;
     font-size: 1.2vw;
+    z-index: 2;
 }
 .categoryList li {
     margin-bottom: 0.7vh;

@@ -6,12 +6,14 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { FilterPipe } from './filter.pipe';
+import { FilterCategoryPipe } from './filter-category.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoListComponent,
-    FilterPipe
+    FilterPipe,
+    FilterCategoryPipe
   ],
   imports: [
     BrowserModule,
