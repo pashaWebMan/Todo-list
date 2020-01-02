@@ -18,7 +18,7 @@ li {
 }
 .note {
     height: 10vh;
-    width: 90vw;
+    width: 94vw;
     background-color: #ff5b5b;
     color: #ffffff;
     font-weight: 600;
@@ -74,13 +74,13 @@ label {
     margin-right: 5vw;
 }
 .endingTime {
-    width: 17vw;
+    width: 21vw;
     text-align: center;
 }
-.alert-danger {
+.alert {
     margin-bottom: 0;
     margin-top: 1rem;
-    width: 90vw;
+    width: 94vw;
 }
 .categoryList {
     display: none;

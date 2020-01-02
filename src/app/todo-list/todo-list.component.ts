@@ -21,7 +21,7 @@ export class TodoListComponent implements OnInit {
     this.notesListAll = this.notesList;
   }
   createNote(name, category, endingTime) {
-    if (name !== "" && endingTime !== "" && !(Object.keys(localStorage).includes(name))) {
+    if (name !== "" && endingTime !== "" && category !== "" && !(Object.keys(localStorage).includes(name))) {
       this.date = moment().format("YYYY-MM-DD HH:mm");
       var newNote = {
         label: name,

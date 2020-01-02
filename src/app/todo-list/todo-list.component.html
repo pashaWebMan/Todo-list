@@ -21,8 +21,7 @@
     </div>
     <input type="submit" value="Add" class="createButton" (click)="createNote(createNoteFieldName.value, createNoteFieldCategory.value, createNoteFieldEndingTime.value)">
     </form>
-    <ngb-alert [dismissible]="false" [type]="'danger'" *ngIf="!noteLabel.valid && noteLabel.touched">Note label is required</ngb-alert>
-    <ngb-alert [dismissible]="false" [type]="'danger'" *ngIf="!noteEndingTime.valid && noteEndingTime.touched">Ending time should match the pattern</ngb-alert>
+    <ngb-alert [dismissible]="false" class="instructions">Each text field shouldn't be empty and label in notes should't match</ngb-alert>
     <table>
         <tr class="note">
             <td>Name</td>
