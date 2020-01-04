@@ -13,6 +13,7 @@ export class TodoListComponent implements OnInit {
   public date;
   public notesListAll = [];
   public localStorageNoteSerialized;
+  public notesListTemp = [];
   public notesList = Object.values(localStorage).map(obj => JSON.parse(obj));
 
   constructor() { }
@@ -34,7 +35,9 @@ export class TodoListComponent implements OnInit {
       this.localStorageNoteSerialized = JSON.stringify(newNote);
       localStorage.setItem(`${newNote.label}`, this.localStorageNoteSerialized);
       this.notesListAll.push(newNote);
-      location.reload();
+      this.notesListTemp.push(newNote);
+      this.notesList = [...this.notesList, ...this.notesListTemp];
+      this.notesListTemp = [];
       }
       else {
         alert("Please follow the instructions")
@@ -77,11 +80,31 @@ export class TodoListComponent implements OnInit {
     this.noteCategoryEditing = note.label;
   }
   pushNoteLabel(note) {
-    localStorage.removeItem(`${this.noteLabelEditing}`);
-    this.createNote(note.label, note.category, note.endingTime);
+    localStorage.removeItem(`${this.noteLabelEditing}`);this.date = moment().format("YYYY-MM-DD HH:mm");
+    var newNote = {
+      label: note.label,
+      category: note.category,
+      creationTime: this.date,
+      endingTime: note.endingTime.replace("T", " "),
+      editingLabel: false,
+      editingCategory: false,
+     }
+    this.localStorageNoteSerialized = JSON.stringify(newNote);
+    localStorage.setItem(`${newNote.label}`, this.localStorageNoteSerialized);
+    this.notesListAll.push(newNote);
   }
   pushNoteCategory(note) {
-    localStorage.removeItem(`${this.noteCategoryEditing}`);
-    this.createNote(note.label, note.category, note.endingTime);
+    localStorage.removeItem(`${this.noteCategoryEditing}`);this.date = moment().format("YYYY-MM-DD HH:mm");
+    var newNote = {
+      label: note.label,
+      category: note.category,
+      creationTime: this.date,
+      endingTime: note.endingTime.replace("T", " "),
+      editingLabel: false,
+      editingCategory: false,
+     }
+    this.localStorageNoteSerialized = JSON.stringify(newNote);
+    localStorage.setItem(`${newNote.label}`, this.localStorageNoteSerialized);
+    this.notesListAll.push(newNote);
   }
 }
