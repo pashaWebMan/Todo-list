@@ -7,37 +7,35 @@ import * as moment from 'moment';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
+  public notesList = Object.values(localStorage).map(obj => JSON.parse(obj));
   public time;
   public noteLabelEditing;
   public noteCategoryEditing;
   public date;
   public notesListAll = [];
   public localStorageNoteSerialized;
-  public notesListTemp = [];
-  public notesList = Object.values(localStorage).map(obj => JSON.parse(obj));
 
   constructor() { }
 
   ngOnInit() {
     this.notesListAll = this.notesList;
   }
-  createNote(name, category, endingTime) {
-    if (name !== "" && endingTime !== "" && category !== "" && !(Object.keys(localStorage).includes(name))) {
+  createNote(label, category, endingTime) {
+    if (label !== "" && endingTime !== "" && category !== "" && !(Object.keys(localStorage).includes(label))) {
       this.date = moment().format("YYYY-MM-DD HH:mm");
       var newNote = {
-        label: name,
+        label: label,
         category: category,
         creationTime: this.date,
         endingTime: endingTime.replace("T", " "),
         editingLabel: false,
         editingCategory: false,
-       }
+      }
       this.localStorageNoteSerialized = JSON.stringify(newNote);
       localStorage.setItem(`${newNote.label}`, this.localStorageNoteSerialized);
       this.notesListAll.push(newNote);
-      this.notesListTemp.push(newNote);
-      this.notesList = [...this.notesList, ...this.notesListTemp];
-      this.notesListTemp = [];
+      this.notesList = Object.values(localStorage).map(obj => JSON.parse(obj));
+      this.notesList = [...this.notesList];
       }
       else {
         alert("Please follow the instructions")
@@ -80,7 +78,8 @@ export class TodoListComponent implements OnInit {
     this.noteCategoryEditing = note.label;
   }
   pushNoteLabel(note) {
-    localStorage.removeItem(`${this.noteLabelEditing}`);this.date = moment().format("YYYY-MM-DD HH:mm");
+    localStorage.removeItem(`${this.noteLabelEditing}`);
+    this.date = moment().format("YYYY-MM-DD HH:mm");
     var newNote = {
       label: note.label,
       category: note.category,
@@ -94,7 +93,8 @@ export class TodoListComponent implements OnInit {
     this.notesListAll.push(newNote);
   }
   pushNoteCategory(note) {
-    localStorage.removeItem(`${this.noteCategoryEditing}`);this.date = moment().format("YYYY-MM-DD HH:mm");
+    localStorage.removeItem(`${this.noteCategoryEditing}`);
+    this.date = moment().format("YYYY-MM-DD HH:mm");
     var newNote = {
       label: note.label,
       category: note.category,
