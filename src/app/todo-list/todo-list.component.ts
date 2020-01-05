@@ -31,9 +31,12 @@ export class TodoListComponent implements OnInit {
         editingLabel: false,
         editingCategory: false,
       }
+      // pushing data to the localStorage
       this.localStorageNoteSerialized = JSON.stringify(newNote);
       localStorage.setItem(`${newNote.label}`, this.localStorageNoteSerialized);
+      // adding data to the list with all items
       this.notesListAll.push(newNote);
+      // refreshing data in array notesList
       this.notesList = Object.values(localStorage).map(obj => JSON.parse(obj));
       this.notesList = [...this.notesList];
       }
@@ -43,6 +46,7 @@ export class TodoListComponent implements OnInit {
     }
   deleteNote(note) {
     this.notesList = this.notesList.filter(n => this.notesList.indexOf(n) !== this.notesList.indexOf(note));
+    this.notesListAll = this.notesList; // remove deleted note from the notesListAll
     localStorage.removeItem(note.label);
   }
   showCategoryList(list) {
