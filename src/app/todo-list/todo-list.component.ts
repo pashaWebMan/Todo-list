@@ -26,7 +26,6 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit() {
     this.notesListAll = this.notesList;
-    alert(this.noteCreationForm);
   }
   createNote(label, category, endingTime) {
     if (label !== "" && endingTime !== "" && category !== "" && !(Object.keys(localStorage).includes(label))) {
