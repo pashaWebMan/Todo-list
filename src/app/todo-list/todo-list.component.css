@@ -140,3 +140,6 @@ label {
     background-color: #ffffff;
     color: #ff5b5b;
 }
+.is-invalid {
+    border: 1px solid #ff4040;
+}

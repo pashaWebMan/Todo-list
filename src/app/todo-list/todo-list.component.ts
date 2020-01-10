@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-list',
@@ -7,6 +8,14 @@ import * as moment from 'moment';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
+
+  constructor(private fb: FormBuilder) { }
+
+  public noteCreationForm = this.fb.group({
+    noteLabel: ['', Validators.required],
+    noteCategory: ['', Validators.required],
+    noteEndingTime: ['', Validators.required]
+  })
   public notesList = Object.values(localStorage).map(obj => JSON.parse(obj));
   public time;
   public noteLabelEditing;
@@ -15,10 +24,9 @@ export class TodoListComponent implements OnInit {
   public notesListAll = [];
   public localStorageNoteSerialized;
 
-  constructor() { }
-
   ngOnInit() {
     this.notesListAll = this.notesList;
+    alert(this.noteCreationForm);
   }
   createNote(label, category, endingTime) {
     if (label !== "" && endingTime !== "" && category !== "" && !(Object.keys(localStorage).includes(label))) {

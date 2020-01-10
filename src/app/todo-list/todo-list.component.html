@@ -1,16 +1,16 @@
 <div class="wrapper">
-    <form class="newNoteForm">
+    <form class="newNoteForm" [formGroup]="noteCreationForm">
     <label for="createNoteFieldName">
         Label
-        <input ngModel #noteLabel="ngModel" type="text" name="noteLabel" #createNoteFieldName class="createNoteField" required>
+        <input type="text" #createNoteFieldName class="createNoteField" formControlName="noteLabel" [class.is-invalid]="noteCreationForm.get('noteLabel').touched && noteCreationForm.get('noteLabel').invalid">
     </label>
     <label for="createNoteFieldCategory">
         Category
-        <input type="text" name="createNoteFieldCategory" #createNoteFieldCategory class="createNoteField category">
+        <input type="text" name="createNoteFieldCategory" #createNoteFieldCategory class="createNoteField category" formControlName="noteCategory" [class.is-invalid]="noteCreationForm.get('noteCategory').touched && noteCreationForm.get('noteCategory').invalid">
     </label>
     <label for="createNoteFieldEndingTime">
         Ending time
-        <input ngModel #noteEndingTime="ngModel" type="datetime-local" placeholder="yyyy-mm-dd --:--" name="noteEndingTime" #createNoteFieldEndingTime class="createNoteField endingTime" required placement="top" ngbTooltip="Please follow the pattern">
+        <input type="datetime-local" placeholder="yyyy-mm-dd --:--" name="noteEndingTime" #createNoteFieldEndingTime class="createNoteField endingTime" placement="top" ngbTooltip="Please follow the pattern" formControlName="noteEndingTime" [class.is-invalid]="noteCreationForm.get('noteEndingTime').touched && noteCreationForm.get('noteEndingTime').invalid">
     </label>
     <div class="categorySection">
         <button (click)="showCategoryList(categoryListItem)" class="createButton showCategoryList">Category</button>
