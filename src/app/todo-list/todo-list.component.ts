@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NotesDataService } from '../notes-data.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -9,14 +10,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class TodoListComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private notesData: NotesDataService) { }
 
   public noteCreationForm = this.fb.group({
     noteLabel: ['', Validators.required],
     noteCategory: ['', Validators.required],
     noteEndingTime: ['', Validators.required]
   })
-  public notesList = Object.values(localStorage).map(obj => JSON.parse(obj));
+  public notesList = this.notesData.notesListInfo;
   public time;
   public noteLabelEditing;
   public noteCategoryEditing;
@@ -28,7 +29,7 @@ export class TodoListComponent implements OnInit {
     this.notesListAll = this.notesList;
   }
   createNote(label, category, endingTime) {
-    if (label !== "" && endingTime !== "" && category !== "" && !(Object.keys(localStorage).includes(label))) {
+    if (label !== "" && endingTime !== "" && category !== "" && !this.notesData.notesListInfo.includes(label)) {
       this.date = moment().format("YYYY-MM-DD HH:mm");
       var newNote = {
         label: label,
@@ -39,12 +40,11 @@ export class TodoListComponent implements OnInit {
         editingCategory: false,
       }
       // pushing data to the localStorage
-      this.localStorageNoteSerialized = JSON.stringify(newNote);
-      localStorage.setItem(`${newNote.label}`, this.localStorageNoteSerialized);
+      this.notesData.pushNoteToLocalStorage(newNote);
       // adding data to the list with all items
       this.notesListAll.push(newNote);
       // refreshing data in array notesList
-      this.notesList = Object.values(localStorage).map(obj => JSON.parse(obj));
+      this.notesList = this.notesData.notesListInfo;
       this.notesList = [...this.notesList];
       }
       else {
