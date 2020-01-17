@@ -11,7 +11,11 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routers';
-import { SortByDatePipe } from './sort-by-date.pipe'
+import { SortByDatePipe } from './sort-by-date.pipe';
+import { UsersInfoComponent } from './users-info/users-info.component'
+import { HttpService } from './http.service';
+import { HttpClientModule } from '@angular/common/http';
+import { TextFilterPipe } from './text-filter.pipe';
 
 
 @NgModule({
@@ -21,17 +25,21 @@ import { SortByDatePipe } from './sort-by-date.pipe'
     FilterPipe,
     FilterCategoryPipe,
     DataTableComponent,
-    SortByDatePipe
+    SortByDatePipe,
+    UsersInfoComponent,
+    TextFilterPipe
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    
   ],
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

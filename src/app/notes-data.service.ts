@@ -23,5 +23,12 @@ export class NotesDataService {
         return 0;
     })
   }
+  sortByNameReversed(noteList: any[]):any[] {
+    return noteList.sort(function(a, b){
+        if(a.label.toLowerCase() < b.label.toLowerCase()) { return 1; }
+        if(a.label.toLowerCase() > b.label.toLowerCase()) { return -1; }
+        return 0;
+    })
+  }
 
 }

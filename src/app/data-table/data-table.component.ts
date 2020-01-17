@@ -11,9 +11,20 @@ export class DataTableComponent implements OnInit {
   constructor(private notesData: NotesDataService) { }
 
   public notesList = this.notesData.notesListInfo;
+  public clicksCount = 0;
  
   sortByName(){
-    this.notesList = this.notesData.sortByName(this.notesList)
+    if (this.clicksCount % 2 !== 1) {
+      this.notesList = this.notesData.sortByName(this.notesList);
+    }
+  }
+  sortByNameReversed() {
+    if (this.clicksCount % 2 === 1) {
+      this.notesList = this.notesData.sortByNameReversed(this.notesList);
+    }
+  }
+  clicksCounter() {
+    this.clicksCount++
   }
 
   ngOnInit() {

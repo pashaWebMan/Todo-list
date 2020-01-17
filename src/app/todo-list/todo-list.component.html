@@ -20,6 +20,7 @@
         </ul>
     </div>
     <button routerLink="/table" class="createButton">Table</button>
+    <button routerLink="/users" class="createButton">Users</button>
     <input type="submit" value="Add" class="createButton" (click)="createNote(createNoteFieldName.value, createNoteFieldCategory.value, createNoteFieldEndingTime.value)">
     </form>
     <ngb-alert [dismissible]="false" class="instructions">Each text field shouldn't be empty and label in notes should't match</ngb-alert>
