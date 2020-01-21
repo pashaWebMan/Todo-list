@@ -16,6 +16,8 @@ import { UsersInfoComponent } from './users-info/users-info.component'
 import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TextFilterPipe } from './text-filter.pipe';
+import { UserComponent } from './user/user.component';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { TextFilterPipe } from './text-filter.pipe';
     DataTableComponent,
     SortByDatePipe,
     UsersInfoComponent,
-    TextFilterPipe
+    TextFilterPipe,
+    UserComponent,
+    MapComponent
   ],
   imports: [
     HttpClientModule,

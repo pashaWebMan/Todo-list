@@ -8,7 +8,10 @@ export class TextFilterPipe implements PipeTransform {
   transform(items, searchText) {
     if(!searchText) return items;
     searchText = searchText.toLowerCase();
-    items.sort((a, b) => {
+    var filteredItems = items.filter(item => {
+      return item.Name.includes(searchText) || item.Email.includes(searchText) || item.Login.includes(searchText)
+    })
+    return filteredItems.sort((a, b) => {
       var matchesA = {
         name: 0,
         email: 0,
@@ -19,30 +22,34 @@ export class TextFilterPipe implements PipeTransform {
         email: 0,
         login: 0
       }
-      if (a.Name.includes(searchText)) {
+      if (a.Name.toLowerCase().includes(searchText)) {
         matchesA.name++
       }
-      if (a.Email.includes(searchText)) {
+      if (a.Email.toLowerCase().includes(searchText)) {
         matchesA.email++
       }
-      if (a.Login.includes(searchText)) {
+      if (a.Login.toLowerCase().includes(searchText)) {
         matchesA.login++
       }
-      if (b.Name.includes(searchText)) {
+      if (b.Name.toLowerCase().includes(searchText)) {
         matchesB.name++
       }
-      if (b.Email.includes(searchText)) {
+      if (b.Email.toLowerCase().includes(searchText)) {
         matchesB.email++
       }
-      if (b.Login.includes(searchText)) {
+      if (b.Login.toLowerCase().includes(searchText)) {
         matchesB.login++
       }
-      if (a.name + a.email + a.login > b.name + b.email + b.login) { return 1 }
-      if (a.name + a.email + a.login < b.name + b.email + b.login) { return -1 }
-      return 0
-    })
-    return items.filter(item => {
-      return item.Name.includes(searchText) || item.Email.includes(searchText) || item.Login.includes(searchText)
+      var sumA = matchesA.name + matchesA.email + matchesA.login;
+      var sumB = matchesB.name + matchesB.email + matchesB.login;
+      console.log("Sum A: ", sumA)
+      console.log("Sum B: ", sumB)
+      if (sumA > sumB) { return -1 }
+      if (sumA < sumB) { return 1 }
+      if (sumA = sumB) {
+        if(a.Name.length > b.Name.length) { return 1 }
+        if(a.Name.length < b.Name.length) { return -1 }
+      }
     })
   }
 

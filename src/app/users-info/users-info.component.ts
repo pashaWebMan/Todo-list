@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { HttpService } from '../http.service'
 
 @Component({
@@ -11,9 +11,11 @@ export class UsersInfoComponent implements OnInit {
   constructor(private httpService: HttpService) { }
   public users;
   public searchField;
+  public isMapActive = false;
 
   ngOnInit() {
     this.httpService.getUsers().subscribe(data => this.users = data);
   }
+
 
 }

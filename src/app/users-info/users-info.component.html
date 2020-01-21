@@ -1,19 +1,15 @@
-<input [(ngModel)]="searchField" type="text" class="form-control">
-<table class="table table-bordered">
-    <tr>
-        <th scope="col">Index</th>
-        <th scope="col">Gender</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Login</th>
-        <th scope="col">Picture</th>
-    </tr>
-    <tr *ngFor="let user of users | textFilter : searchField; let i = index;">
-        <th>{{ i + 1 }}</th>
-        <td>{{ user.Gender }}</td>
-        <td>{{ user.Name }}</td>
-        <td>{{ user.Email }}</td>
-        <td>{{ user.Login }}</td>
-        <td><img [attr.src]="user.Picture" alt=""></td>
-    </tr>
-</table>
+<div class="container-fluid">
+    <input [(ngModel)]="searchField" type="text" class="form-control">
+        <div class="row row-header">
+                <div class="col-sm-1 border">Index</div>
+                <div class="col-sm-1 border">Gender</div>
+                <div class="col-sm-2 border">Name</div>
+                <div class="col-sm-3 border">Email</div>
+                <div class="col-sm-2 border">Login</div>
+                <div class="col-sm-1 border">Picture</div>
+                <div class="col-sm-2 border">Location</div>
+        </div>
+        <div *ngFor="let user of users | textFilter: searchField; let i = index">
+            <app-user class="row row-user" [user]="user" [index]="i"></app-user>
+        </div>
+</div>
