@@ -10,6 +10,7 @@ export class UserComponent implements OnInit {
 
   @Input() user: any;
   @Input() index;
+  public location;
 
   constructor(private httpService: HttpService) { }
   public isMapActive = false;
@@ -19,6 +20,10 @@ export class UserComponent implements OnInit {
   
   showMap() {
     this.isMapActive = !this.isMapActive;
+  }
+  func(e:string) {
+    this.location = e;
+    console.log(this.location);
   }
 
 
