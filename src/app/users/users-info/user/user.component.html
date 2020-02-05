@@ -5,5 +5,5 @@
 <div class="col-sm-2 border">{{ user.Login }}</div>
 <div class="col-sm-1 border"><img [attr.src]="user.Picture" alt=""></div>
 <div class="col-sm-2 border clickable" (click)="showMap()" name="location" *ngIf="location === undefined; else coordinates" ngDefaultControl [(ngModel)]="location">{{ user.Latitude }},{{ user.Longitude }}</div>
-<ng-template #coordinates><div class="col-sm-2 border clickable">{{ location }}</div></ng-template>
+<ng-template #coordinates><div class="col-sm-2 border clickable" (click)="showMap()">{{ location }}</div></ng-template>
 <app-map *ngIf="isMapActive" class="map" [longitude]="user.Longitude" [latitude]="user.Latitude" (changeLocation)="func($event)"></app-map>

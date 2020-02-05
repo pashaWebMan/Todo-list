@@ -1,11 +1,8 @@
-import { TodoListComponent } from './todo-list/todo-list.component';
-import { DataTableComponent } from './data-table/data-table.component';
 import { Routes } from '@angular/router';
-import { UsersInfoComponent } from './users-info/users-info.component';
 
 export const appRoutes: Routes = [
-    { path: 'table', component: DataTableComponent},
-    { path: 'home', component: TodoListComponent},
-    { path: 'users', component: UsersInfoComponent},
-    { path: '**', redirectTo: '/home'}
+  { path: 'users', loadChildren: './users/users-info/users-info.module#UsersInfoModule'},
+  { path: 'table', loadChildren: './table/table.module#TableModule'},
+  { path: 'home', loadChildren: './todo-list/todo-list.module#TodoListModule'},
+  { path: '**', redirectTo: '/home'},
   ];

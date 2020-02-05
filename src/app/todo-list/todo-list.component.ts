@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { FormBuilder, Validators } from '@angular/forms';
-import { NotesDataService } from '../notes-data.service';
+import { NotesDataService } from '../shared-services/notes-data.service';
+import { NoteItem } from '../models/note-item.model';
 
 @Component({
   selector: 'app-todo-list',
@@ -17,44 +18,40 @@ export class TodoListComponent implements OnInit {
     noteCategory: ['', Validators.required],
     noteEndingTime: ['', Validators.required]
   })
-  public notesList = this.notesData.notesListInfo;
-  public time;
-  public noteLabelEditing;
-  public noteCategoryEditing;
-  public date;
-  public notesListAll = [];
-  public localStorageNoteSerialized;
+  public notesList: NoteItem[] = [] 
+  public noteLabelEditing: boolean;
+  public noteCategoryEditing: boolean;
+  public notesListAll: NoteItem[] = [];
 
   ngOnInit() {
-    this.notesListAll = this.notesList;
+    this.notesList = this.notesData.getNotes();
+    this.notesListAll = this.notesList
   }
-  createNote(label, category, endingTime) {
-    if (label !== "" && endingTime !== "" && category !== "" && !this.notesData.notesListInfo.includes(label)) {
-      this.date = moment().format("YYYY-MM-DD HH:mm");
-      var newNote = {
+  createNote(label:string, category:string, endingTime:string) {
+    if (label !== "" && endingTime !== "" && category !== "" && !this.notesData.getNotes().some(x => x.label === label)) {
+      let date = new Date();
+      var newNote: NoteItem = {
         label: label,
         category: category,
-        creationTime: this.date,
-        endingTime: endingTime.replace("T", " "),
+        creationTime: date,
+        endingTime: new Date(endingTime),
         editingLabel: false,
         editingCategory: false,
       }
       // pushing data to the localStorage
-      this.notesData.pushNoteToLocalStorage(newNote);
+      this.notesData.pushNote(newNote);
       // adding data to the list with all items
       this.notesListAll.push(newNote);
       // refreshing data in array notesList
-      this.notesList = this.notesData.notesListInfo;
-      this.notesList = [...this.notesList];
+      this.notesList = this.notesData.getNotes();
       }
       else {
         alert("Please follow the instructions")
       }
     }
-  deleteNote(note) {
-    this.notesList = this.notesList.filter(n => this.notesList.indexOf(n) !== this.notesList.indexOf(note));
-    this.notesListAll = this.notesList; // remove deleted note from the notesListAll
-    localStorage.removeItem(note.label);
+    deleteNote(note) {
+    this.notesData.deleteNote(note);
+    this.notesList = this.notesData.getNotes();
   }
   showCategoryList(list) {
     if(list.style.display == 'none' || list.style.display == ''){
@@ -71,16 +68,16 @@ export class TodoListComponent implements OnInit {
     this.notesList = this.notesListAll;
   }
   labelEditing(note) {
-    note.labelEditing = true;
+    note.editingLabel = true;
   }
   categoryEditing(note) {
-    note.categoryEditing = true;
+    note.editingCategory = true;
   }
   labelEditingDone(note) {
-    note.labelEditing = false;
+    note.editingLabel = false;
   }
   categoryEditingDone(note) {
-    note.categoryEditing = false;
+    note.editingCategory = false;
   }
   getNoteLabelEditing(note) {
     this.noteLabelEditing = note.label;
@@ -88,34 +85,7 @@ export class TodoListComponent implements OnInit {
   getNoteCategoryEditing(note) {
     this.noteCategoryEditing = note.label;
   }
-  pushNoteLabel(note) {
-    localStorage.removeItem(`${this.noteLabelEditing}`);
-    this.date = moment().format("YYYY-MM-DD HH:mm");
-    var newNote = {
-      label: note.label,
-      category: note.category,
-      creationTime: this.date,
-      endingTime: note.endingTime.replace("T", " "),
-      editingLabel: false,
-      editingCategory: false,
-     }
-    this.localStorageNoteSerialized = JSON.stringify(newNote);
-    localStorage.setItem(`${newNote.label}`, this.localStorageNoteSerialized);
-    this.notesListAll.push(newNote);
-  }
-  pushNoteCategory(note) {
-    localStorage.removeItem(`${this.noteCategoryEditing}`);
-    this.date = moment().format("YYYY-MM-DD HH:mm");
-    var newNote = {
-      label: note.label,
-      category: note.category,
-      creationTime: this.date,
-      endingTime: note.endingTime.replace("T", " "),
-      editingLabel: false,
-      editingCategory: false,
-     }
-    this.localStorageNoteSerialized = JSON.stringify(newNote);
-    localStorage.setItem(`${newNote.label}`, this.localStorageNoteSerialized);
-    this.notesListAll.push(newNote);
+  updateNote(note) {
+    this.notesData.updateNote(note);
   }
 }

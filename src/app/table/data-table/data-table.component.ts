@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NotesDataService } from '../notes-data.service';
+import { NotesDataService } from '../../shared-services/notes-data.service';
 
 @Component({
   selector: 'app-data-table',
@@ -10,7 +10,7 @@ export class DataTableComponent implements OnInit {
 
   constructor(private notesData: NotesDataService) { }
 
-  public notesList = this.notesData.notesListInfo;
+  public notesList = this.notesData.getNotes();
   public clicksCount = 0;
  
   sortByName(){

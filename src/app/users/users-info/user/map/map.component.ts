@@ -11,6 +11,7 @@ export class MapComponent implements OnInit {
   @ViewChild('map', {static: true}) mapElement: any;
   public map: google.maps.Map;
   public position;
+  public marker;
   @Input() latitude;
   @Input() longitude;
   @Output() changeLocation = new EventEmitter();
@@ -28,7 +29,10 @@ export class MapComponent implements OnInit {
       placeMarker(e.latLng, this.map);
     });
     var placeMarker = (position, map) => {
-      var marker = new google.maps.Marker({
+      if(this.marker) {
+        this.marker.setMap(null);
+      }
+      this.marker = new google.maps.Marker({
           position: position,
           map: map
       });
