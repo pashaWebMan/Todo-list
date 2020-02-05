@@ -1,0 +1,16 @@
+.container-fluid {
+    display: flex;
+    justify-content: center;
+}
+.login-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 200px;
+    padding: 60px 30px;
+    border-radius: 10px;
+    align-items: stretch;
+}
+button {
+    margin-top: 20px;
+}

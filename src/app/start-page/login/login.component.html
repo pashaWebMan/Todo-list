@@ -1,0 +1,11 @@
+<div class="container-fluid">
+    <div class="login-menu bg-dark">
+        <label for="login" class="text-light">Login <br>
+            <input #login name="login" type="text">
+        </label>
+        <label for="password" class="text-light">Password <br>
+            <input #password name="password" type="password">
+        </label>
+        <button (click)="authorisation(password.value, login.value)" class="btn btn-light">Submit</button>
+    </div>
+</div>
